@@ -12,9 +12,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
@@ -73,13 +76,65 @@ fun HomeScreen(
                     )
                 }
             }
-
-            Row {
-
+            Spacer(modifier = Modifier.size(24.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column {
+                    Text(text = "Selamat Datang,", color = Color.White)
+                    Text(text = "<nama>", color = Color.White)
+                }
+                Column(
+                    horizontalAlignment = Alignment.End
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Image(
+                            painter = painterResource(id = R.drawable.baseline_refresh_24),
+                            contentDescription = "Refresh saldo"
+                        )
+                        Spacer(modifier = Modifier.size(4.dp))
+                        Text(text = "Saldo", color = Color.White)
+                    }
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Image(
+                            painter = painterResource(id = R.drawable.baseline_remove_red_eye_24),
+                            contentDescription = "Hide saldo"
+                        )
+                        Spacer(modifier = Modifier.size(4.dp))
+                        Text(text = "Rp123.456.789", color = Color.White)
+                    }
+                }
             }
-
-            Row {
-
+            Spacer(modifier = Modifier.size(24.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .shadow(elevation = 8.dp, shape = RoundedCornerShape(16.dp))
+                    .background(color = Color.White, shape = RoundedCornerShape(16.dp))
+                    .height(200.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(
+                    modifier = Modifier
+                        .size(72.dp)
+                        .shadow(elevation = 8.dp, shape = RoundedCornerShape(16.dp))
+                        .background(color = Color.White),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.baseline_attach_money_24),
+                        contentDescription = null,
+                        colorFilter = ColorFilter.tint(Color(0xFF3E9EED))
+                    )
+                    Text(text = "Top up")
+                }
             }
         }
     }
