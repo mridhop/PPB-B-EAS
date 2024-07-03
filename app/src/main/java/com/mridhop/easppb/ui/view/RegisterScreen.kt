@@ -1,5 +1,6 @@
 package com.mridhop.easppb.ui.view
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -38,6 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.state.ToggleableState
@@ -59,6 +61,7 @@ fun RegisterScreen(navController: NavController, phoneNumber: String) {
     var job by rememberSaveable { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
     var isChecked by remember { mutableStateOf(false) }
+    val context = LocalContext.current
 
     Box(modifier = Modifier
         .fillMaxSize()
@@ -142,7 +145,7 @@ fun RegisterScreen(navController: NavController, phoneNumber: String) {
                     onValueChange = { job = it },
                     label = { Text(text = "Masukkan pekerjaan Anda")},
                     keyboardOptions = KeyboardOptions(
-                        imeAction = ImeAction.Next
+                        imeAction = ImeAction.Done
                     ),
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedTextColor = Color.Black,
@@ -161,18 +164,36 @@ fun RegisterScreen(navController: NavController, phoneNumber: String) {
                 Spacer(modifier = Modifier.height(36.dp))
                 Button(
                     onClick = {
-                        val userProfile = UserProfile(
-                            phoneNumber = phoneNumber,
-                            fullName = fullName,
-                            email = email,
-                            job = job,
-                            password = ""
-                        )
-                        val userProfileJson = Json.encodeToString(
-                            UserProfile.serializer(),
-                            userProfile
-                        )
-                        navController.navigate("register_password/$userProfileJson")
+                        if (
+                            fullName.isEmpty() ||
+                            email.isEmpty() ||
+                            job.isEmpty()
+                        ) {
+                            Toast.makeText(
+                                context,
+                                "Pastikan data tidak kosong!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else if (!isChecked) {
+                            Toast.makeText(
+                                context,
+                                "Anda harus menyetujui peraturan kebijakan aplikasi i.saku!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            val userProfile = UserProfile(
+                                phoneNumber = phoneNumber,
+                                fullName = fullName,
+                                email = email,
+                                job = job,
+                                password = ""
+                            )
+                            val userProfileJson = Json.encodeToString(
+                                UserProfile.serializer(),
+                                userProfile
+                            )
+                            navController.navigate("register_password/$userProfileJson")
+                        }
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF3E9EED)),
                     modifier = Modifier
