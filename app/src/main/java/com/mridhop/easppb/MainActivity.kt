@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mridhop.easppb.ui.theme.EASPPBTheme
+import com.mridhop.easppb.ui.view.HomeScreen
 import com.mridhop.easppb.ui.view.LoginPasswordScreen
 import com.mridhop.easppb.ui.view.RegisterPasswordScreen
 import com.mridhop.easppb.ui.view.RegisterScreen
@@ -32,7 +33,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp() {
     val context = LocalContext.current
-    val userViewModel: UserViewModel = ViewModelUtil.getUserViewModel(context = context)
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = Screen.WelcomeScreen.route) {
@@ -57,6 +57,9 @@ fun MyApp() {
                 navController = navController,
                 userProfileJson = backStackEntry.arguments?.getString("userProfileJson") ?: ""
             )
+        }
+        composable("home") {
+            HomeScreen(navController = navController, "")
         }
     }
 }

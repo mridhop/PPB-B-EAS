@@ -16,4 +16,7 @@ sealed class Screen {
         const val route = "register_password"
         fun withArgs(userProfileJson: String): String = "register_password/$userProfileJson"
     }
+    object HomeScreen {
+        const val route = "home"
+    }
 }

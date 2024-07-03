@@ -110,7 +110,7 @@ fun LoginPasswordScreen(navController: NavController, phoneNumber: String) {
 
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
-                    onClick = { /* Handle click */ },
+                    onClick = { navController.navigate("home") },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF3E9EED)),
                     modifier = Modifier
                         .fillMaxWidth(),
