@@ -22,6 +22,9 @@ interface UserProfileDao {
     @Query("SELECT EXISTS(SELECT * FROM user_profile WHERE phone_number = :phoneNumber)")
     suspend fun isPhoneNumberExists(phoneNumber: String): Boolean
 
+    @Query("SELECT EXISTS(SELECT * FROM user_profile WHERE phone_number = :phoneNumber AND password = :password)")
+    suspend fun checkUserCredentials(phoneNumber: String, password: String): Boolean
+
     @Insert
     suspend fun insert(userProfile: UserProfile)
 

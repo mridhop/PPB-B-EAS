@@ -11,4 +11,8 @@ class UserRepository(private val userProfileDao: UserProfileDao) {
     suspend fun insert(userProfile: UserProfile) {
         userProfileDao.insert(userProfile)
     }
+
+    suspend fun checkUserCredentials(phoneNumber: String, password: String): Boolean {
+        return userProfileDao.checkUserCredentials(phoneNumber, password)
+    }
 }

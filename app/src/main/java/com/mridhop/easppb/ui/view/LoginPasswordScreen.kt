@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
@@ -25,8 +26,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,12 +38,16 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.mridhop.easppb.R
+import com.mridhop.easppb.ui.viewmodel.UserViewModel
+import com.mridhop.easppb.util.ViewModelUtil
 
 @Composable
 fun LoginPasswordScreen(navController: NavController, phoneNumber: String) {
     var password by remember {
         mutableStateOf("")
     }
+    val context = LocalContext.current
+    val userViewModel: UserViewModel = ViewModelUtil.getUserViewModel(context)
 
     Box(modifier = Modifier
         .fillMaxSize()
@@ -104,13 +111,18 @@ fun LoginPasswordScreen(navController: NavController, phoneNumber: String) {
                         onValueChange = { password = it },
                         label = { Text("Masukkan password") },
                         visualTransformation = PasswordVisualTransformation(),
+                        keyboardOptions = KeyboardOptions(
+                            imeAction = ImeAction.Done
+                        ),
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
-                    onClick = { navController.navigate("home") },
+                    onClick = {
+                        userViewModel.loginUser(phoneNumber, password, navController, context)
+                    },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF3E9EED)),
                     modifier = Modifier
                         .fillMaxWidth(),

@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -15,8 +14,6 @@ import com.mridhop.easppb.ui.view.LoginPasswordScreen
 import com.mridhop.easppb.ui.view.RegisterPasswordScreen
 import com.mridhop.easppb.ui.view.RegisterScreen
 import com.mridhop.easppb.ui.view.WelcomeScreen
-import com.mridhop.easppb.ui.viewmodel.UserViewModel
-import com.mridhop.easppb.util.ViewModelUtil
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +29,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyApp() {
-    val context = LocalContext.current
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = Screen.WelcomeScreen.route) {
@@ -58,8 +54,12 @@ fun MyApp() {
                 userProfileJson = backStackEntry.arguments?.getString("userProfileJson") ?: ""
             )
         }
-        composable("home") {
-            HomeScreen(navController = navController, "")
+        composable("${Screen.HomeScreen.route}/{phoneNumber}") {
+            backStackEntry ->
+            HomeScreen(
+                navController = navController,
+                phoneNumber = backStackEntry.arguments?.getString("phoneNumber") ?: ""
+            )
         }
     }
 }
