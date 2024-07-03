@@ -1,0 +1,133 @@
+{
+  "name": "button",
+  "version": 33,
+  "source-key": {
+    "type": "figma",
+    "file": "ywNkVLTvMe7YhN4fSKCyL1",
+    "node": "14:69",
+    "version": "6119241057",
+    "component-id": "3f3f6cb4463227af71df548dc4ea52fc62df1aa3"
+  },
+  "default": "Button",
+  "documentation": "ActionButton",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "group",
+        "id": "state-layer"
+      },
+      {
+        "type": "text",
+        "id": "label-text"
+      }
+    ],
+    "modes": {
+      "Button": {
+        "rules": [
+          {
+            "id": "top_level",
+            "border-radius": 7.0,
+            "stroke-alignment": "center",
+            "children": [
+              "state-layer"
+            ],
+            "item-spacing": 8.0,
+            "background-color": {
+              "alpha": 1.0,
+              "hue": 207.0857142857143,
+              "saturation": 0.7383966244725738,
+              "value": 0.9294117647058824
+            }
+          },
+          {
+            "id": "state-layer",
+            "padding": {
+              "left": 24.0,
+              "top": 10.0,
+              "right": 24.0,
+              "bottom": 10.0
+            },
+            "arrangement": "row",
+            "children": [
+              "label-text"
+            ],
+            "item-spacing": 8.0,
+            "clip-content": false
+          },
+          {
+            "id": "label-text",
+            "font-weight": "^md.sys.typescale.label-large.weight",
+            "color": {
+              "alpha": 1.0,
+              "hue": 0.0,
+              "saturation": 0.0,
+              "value": 1.0
+            },
+            "text-content": "$label",
+            "overflow": "visible",
+            "text-align-vertical": "center",
+            "text-size": "^md.sys.typescale.label-large.size",
+            "letter-spacing": "^md.sys.typescale.label-large.tracking",
+            "line-height": "^md.sys.typescale.label-large.line-height",
+            "typeface": "^md.sys.typescale.label-large.font"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "label": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    }
+  },
+  "ambients": {
+    "md.sys.typescale.label-large.font": {
+      "data-type": "typeface",
+      "description": null
+    },
+    "md.sys.typescale.label-large.weight": {
+      "data-type": "double",
+      "description": null
+    },
+    "md.sys.typescale.label-large.size": {
+      "data-type": "double",
+      "description": null
+    },
+    "md.sys.typescale.label-large.tracking": {
+      "data-type": "double",
+      "description": null
+    },
+    "md.sys.typescale.label-large.line-height": {
+      "data-type": "double",
+      "description": null
+    }
+  },
+  "previews": [
+    {
+      "design": "Button",
+      "size": {
+        "width": 332.0,
+        "height": 52.0
+      },
+      "parameters": {
+        "label": "Masuk"
+      },
+      "ambients": {
+        "md.sys.typescale.label-large.weight": 500.0,
+        "md.sys.typescale.label-large.size": 14.0,
+        "md.sys.typescale.label-large.tracking": 0.10000000149011612,
+        "md.sys.typescale.label-large.line-height": 1.4285714721679688
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}
